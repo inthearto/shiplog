@@ -98,6 +98,10 @@ Use your best model for brainstorming, a fast one for implementation. **shiplog*
 
 When a reasoning model hands work to a faster model, the handoff is structured: allowed files, forbidden changes, stop conditions, verification requirements, and decision budget. If a tier-3 model reading the handoff would need to make a judgment call, the handoff is not specific enough.
 
+### Runtime-aware orchestration
+
+**shiplog** distinguishes orchestration from isolation. A task might stay inside one orchestrator with local parallel tool calls, fan out to bounded sub-agents, or move to an external session such as a tmux-backed background worker. The important part is that the dispatch contract and collection summary are durable, and that **shiplog** does not pretend a helper lane is an independent reviewer when it is not.
+
 ### Discovery protocol
 
 Find a bug while building a feature? **shiplog** classifies it and routes it:
@@ -158,7 +162,7 @@ Cross-platform from day one. Full Bash and PowerShell support using `gh ... --bo
 
 ### Worktree-first workflow
 
-One branch, one worktree, one agent. Safe concurrent operation by default — no branch-switching conflicts when multiple sessions are active.
+One branch, one worktree, one agent for the primary feature line. Parallel helpers may use sub-agents, forked workspaces, or external sessions, but **shiplog** still records the canonical feature branch/worktree and gives you a safe post-merge cleanup protocol.
 
 ---
 
@@ -259,7 +263,7 @@ For local iteration without reinstalling after every change.
 
 ## Slash Commands
 
-Invoke specific **shiplog** operations directly instead of loading the full skill:
+In environments that load repo command files, invoke specific **shiplog** operations directly instead of loading the full skill. Other runtimes may expose only the main skill and natural-language phase requests.
 
 | Command | What It Does |
 |---------|-------------|
@@ -276,7 +280,7 @@ Commands are lightweight entry points — each one gathers context and executes 
 
 ### Installing Commands
 
-Commands are installed automatically with the plugin. For manual installs, copy the commands directory:
+Command files are installed automatically with the Claude Code plugin. For manual installs in environments that support command directories, copy the commands directory:
 
 ```bash
 # Global (all projects)

@@ -194,6 +194,23 @@ Roles: `Authored-by`, `Updated-by`, `Reviewed-by`, `Last-code-by`. See `referenc
 
 **Searching:** `Last-code-by:` → most recent code author on a PR branch. See `references/signing.md` for all searchable provenance fields.
 
+For orchestration flows, qualifiers may also record lane role, for example `orchestrator` or `sub-agent: reviewer`.
+
+---
+
+## Runtime-Aware Orchestration
+
+Shiplog records orchestration honestly instead of assuming one agent backend fits every runtime.
+
+- **Local parallel tool fan-out:** one orchestrator runs multiple independent helper calls in parallel. Good for sidecar reads; not a separate reviewer identity.
+- **Bounded sub-agent:** the orchestrator spawns a child lane with a scoped contract and collects a return artifact.
+- **External session delegation:** a separate tmux session, terminal agent, or other durable worker runs the lane outside the current orchestrator.
+- **Contract-only fallback:** shiplog emits the handoff or review contract when the current runtime cannot execute the lane itself.
+
+Isolation backend is tracked separately from the orchestration primitive. A git worktree, forked workspace, or tmux session may all isolate delegated work, but only the primary feature branch/worktree is shiplog's canonical branch record.
+
+See `references/orchestrator-protocol.md` for the capability mapping, fan-out templates, and cleanup protocol.
+
 ---
 
 ## Integration Map
@@ -214,6 +231,9 @@ This skill ORCHESTRATES. For activities that directly produce shiplog artifacts 
 | Fixing issues | `ork:fix-issue` | — | Timeline documentation of RCA |
 | Storing decisions | `ork:remember` | — | Structured `#ID: decision` entries |
 | Model routing | Built-in | — | Phase entry check (Step 0), routing prompts, handoffs |
+| Fan-out dispatch | `references/orchestrator-protocol.md` | runtime sub-agent/session tools | Dispatch artifact, per-lane contracts, collection summary |
+| Review and verifier lanes | `references/orchestrator-protocol.md` + `references/closure-and-review.md` | runtime reviewer/verifier tools | Auto-dispatch ladder and contract-only fallback |
+| Worktree hygiene | `references/orchestrator-protocol.md` | shell commands or external cleanup helpers | Workspace tracking and post-merge cleanup protocol |
 
 **Internalized workflows:** Commit and PR workflows are internalized in `references/` to enforce shiplog conventions (ID-first naming, provenance signing, envelope metadata, review gates). External skills may be used alongside for their non-convention features (validation agents, security scanning), but shiplog's conventions take precedence. See `LICENSES/` for attribution of the original skill sources.
 
@@ -231,6 +251,7 @@ This skill ORCHESTRATES. For activities that directly produce shiplog artifacts 
 - **Hotfix / emergency:** Fix first. Create issue and PR after, backfilling the timeline.
 - **Quiet mode — feature PR merges:** Close the `--log` PR. Knowledge is preserved in closed PR history.
 - **Quiet mode — feature branch rebased:** Rebase `--log` branch onto updated feature branch. Use `--force-with-lease`.
+- **Post-merge cleanup:** Remove a worktree only when its branch is merged, no open PR still depends on it, and it is not the active workspace. See `references/orchestrator-protocol.md`.
 
 ---
 
