@@ -223,8 +223,8 @@ Portable cleanup sequence:
 
 ```bash
 git fetch origin
-git worktree list
 git branch --merged origin/$(gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name')
+git worktree list
 git worktree remove <path-to-worktree>
 git branch -d <branch-name>
 ```
@@ -232,8 +232,8 @@ git branch -d <branch-name>
 ```powershell
 git fetch origin
 $defaultBranch = gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name'
-git worktree list
 git branch --merged origin/$defaultBranch
+git worktree list
 git worktree remove <path-to-worktree>
 git branch -d <branch-name>
 ```

@@ -88,7 +88,7 @@ phase: <PHASE>
 updated_at: <ISO_TIMESTAMP>
 -->
 
-## [shiplog/worklog] #<ID>: fan-out dispatch
+## [shiplog/handoff] #<ID>: fan-out dispatch
 
 **Orchestrator:** <family>/<version> (<tool>[, <qualifier>])
 **Primitive:** local-parallel-tools | bounded-sub-agents | external-sessions | mixed
