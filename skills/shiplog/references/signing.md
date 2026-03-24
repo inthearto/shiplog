@@ -16,9 +16,24 @@ Every shiplog artifact (comments, PR bodies, review sign-offs) must carry a prov
 | `family` | Provider name, lowercase | `claude`, `openai`, `google` |
 | `version` | Model identifier | `opus-4.6`, `sonnet-4`, `gpt-5.4` |
 | `tool` | Runtime environment, lowercase | `claude-code`, `codex`, `cursor` |
-| `qualifier` | Optional tool-specific metadata | `effort: high`, `effort: medium` |
+| `qualifier` | Optional metadata string; may be compound when needed | `effort: high`, `orchestrator`, `sub-agent: reviewer`, `effort: high; orchestrator` |
 
 **Searching:** `Authored-by:` → original authorship. `Updated-by:` → later material editors. `Reviewed-by:` → review artifacts. `Last-code-by:` → most recent code author on a PR branch. `claude/` → all Claude artifacts. `(codex` → all Codex artifacts.
+
+### Orchestration role qualifiers
+
+When an artifact is emitted as part of a multi-lane flow, qualifiers may carry orchestration role information:
+
+- `orchestrator` — the current actor dispatched or collected delegated lanes
+- `sub-agent: reviewer` — delegated reviewer lane
+- `sub-agent: verifier` — delegated closure verifier lane
+- `sub-agent: implementation` — delegated implementation lane
+
+Examples:
+
+- `Authored-by: openai/gpt-5.4 (codex, effort: high; orchestrator)`
+- `Reviewed-by: claude/opus-4.6 (claude-code, sub-agent: reviewer)`
+- `Authored-by: openai/gpt-5.4 (codex, sub-agent: verifier)`
 
 ---
 

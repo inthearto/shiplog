@@ -54,9 +54,9 @@ If the match between the issue and the evidence is ambiguous:
 1. **Do not close the issue.** Leave it open.
 2. Post a comment explaining the ambiguity.
 3. Tag the issue for human review or escalate to a higher-tier model.
-4. If a verifier agent is available, delegate the ambiguity check using the bounded handoff contract from `references/model-routing.md`.
+4. If a verifier lane is available, delegate the ambiguity check using the bounded handoff contract from `references/model-routing.md` and the dispatch/collection rules from `references/orchestrator-protocol.md`.
 
-### Optional verifier-agent workflow
+### Optional verifier-lane workflow
 
 Use this workflow when closure evidence is specific enough to audit but repetitive enough to delegate.
 The supervising model remains responsible for the closure decision.
@@ -64,6 +64,7 @@ The supervising model remains responsible for the closure decision.
 **Supervisor responsibilities:**
 - choose the candidate evidence links to inspect
 - assemble a bounded verifier contract using the handoff template from `references/model-routing.md`
+- choose the strongest available execution primitive from `references/orchestrator-protocol.md`
 - keep closure judgment for ambiguous issues, umbrella issues, and any case where the verifier reports mismatch or low confidence
 
 **Verifier may:**
@@ -294,18 +295,26 @@ All AI agents authenticate as the repository owner's GitHub account. Formal same
 - The cross-model provenance in the `Reviewed-by:` line is the authoritative review signal for shiplog, not the GitHub review badge.
 - Merge authorization follows the shiplog sign-off (see Section 5), not GitHub `reviewDecision`, review badges, or formal review states.
 
-### Best: Spawn a review agent
+### Best: Dispatch a bounded reviewer lane
 
-If the current tool supports spawning a bounded agent:
+If the current tool supports bounded sub-agents or an equivalent external-session lane:
 
 1. Prepare a review contract (see below).
-2. Spawn the reviewer with read-only access to the PR diff.
-3. The reviewer produces a signed review artifact.
-4. The author addresses findings or proceeds to merge on approval.
+2. Dispatch the reviewer using the strongest available primitive from `references/orchestrator-protocol.md`.
+3. Keep the reviewer read-only with respect to the review target unless the workflow explicitly allows reviewer-authored fixes.
+4. The reviewer produces a signed review artifact.
+5. The author addresses findings or proceeds to merge on approval.
+
+**Dispatch order:**
+
+1. **Bounded sub-agent** — best when the runtime can spawn a child reviewer with a scoped contract.
+2. **External session delegation** — use a tmux-backed session, separate terminal agent, or other durable session when that is the available isolation boundary.
+
+In both cases, post durable dispatch and collection artifacts when the review lane is material to the PR timeline. See `references/orchestrator-protocol.md`.
 
 ### Fallback: Generate a review contract
 
-If spawning is unavailable, generate a self-contained review contract for the user to hand to another model/tool:
+If no reviewer lane can be executed from the current runtime, generate a self-contained review contract for the user to hand to another model/tool:
 
 ```markdown
 ## Review Contract
@@ -334,6 +343,10 @@ Sign-off comment with:
 - Follow-ups: #<issue-number> or none
 - Any findings (tag non-blocking items with `[follow-up]`)
 ```
+
+### Not a valid substitute: local parallel tool fan-out
+
+Running multiple local helper calls in parallel can speed up evidence gathering, but it does **not** create an independent reviewer identity. Use local fan-out for sidecar reads or diff inspection helpers only. The signed review artifact must still come from a distinct reviewer lane or a separate model/tool.
 
 ### When independent review is unavailable: audit trail only
 
@@ -422,7 +435,7 @@ Before creating a PR, check:
 - Who will review? (Note in the PR body if pre-arranged.)
 
 After creating a PR:
-- If cross-model review is available, request it immediately.
+- If a reviewer lane is available, dispatch it immediately using the orchestration ladder above.
 - If not, generate the review contract and inform the user.
 
 ### Phase 4 (Commit-with-Context)

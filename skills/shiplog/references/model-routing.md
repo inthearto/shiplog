@@ -208,6 +208,8 @@ When work transfers between models or tools — whether prompted by routing or n
 - Delegating bounded work to another agent
 - Any time the next model won't have the current conversation context
 
+For N-way dispatch, use this handoff as the per-lane contract and pair it with the fan-out dispatch and collection artifacts from `references/orchestrator-protocol.md`.
+
 ### Handoff template
 
 ```markdown

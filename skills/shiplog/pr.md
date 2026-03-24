@@ -6,7 +6,7 @@ description: "Phase 5: Create PR with timeline body, handle review gate, and lin
 # PR Timeline (Phase 5)
 
 <!-- routing: tier-1, plan -->
-<!-- cross-cutting: references/model-routing.md (Step 0), references/signing.md, references/closure-and-review.md, references/labels.md -->
+<!-- cross-cutting: references/model-routing.md (Step 0), references/signing.md, references/closure-and-review.md, references/labels.md, references/orchestrator-protocol.md -->
 
 0. **Routing check.** Run the phase entry check from `references/model-routing.md`.
 
@@ -16,11 +16,11 @@ description: "Phase 5: Create PR with timeline body, handle review gate, and lin
 
 3. **Quiet Mode.** Create a clean feature PR (no shiplog content). Add a final summary comment to the `--log` PR using the quiet-mode template below. Sign per `references/signing.md`.
 
-4. **Review gate.** Every PR requires cross-model review before merge. See `references/closure-and-review.md` for the review protocol, sign-off format, and merge authorization rules.
+4. **Review gate.** Every PR requires cross-model review before merge. Use the execution ladder in `references/closure-and-review.md`: bounded reviewer lane if available, then external session delegation, then a contract-only review handoff. Local parallel tool fan-out does not count as an independent reviewer identity.
 
 5. **Link and store.** PR body includes `Closes #<issue>` when the PR fully resolves the issue. For partial delivery, use `Addresses #<issue> (completes T1, T2, ...)` - see the partial-delivery template below and `references/closure-and-review.md` Section 1. Store key learning in knowledge graph.
 
-6. **Closure verification (optional).** When evidence-to-issue mapping is non-obvious, optionally delegate a bounded verifier agent per `references/closure-and-review.md`.
+6. **Closure verification (optional).** When evidence-to-issue mapping is non-obvious, optionally dispatch a verifier lane using the same orchestration ladder described in `references/closure-and-review.md` and `references/orchestrator-protocol.md`.
 
 ---
 
@@ -114,6 +114,8 @@ Last-code-by: <family>/<version> (<tool>)
 
 The PR body is large enough that `--body-file` should be the preferred portable path.
 After every signed review comment and every post-review code push, refresh this review snapshot in place per `references/closure-and-review.md` and `references/signing.md`.
+
+If review or cleanup work is dispatched in parallel, post the fan-out dispatch and collection artifacts from `references/orchestrator-protocol.md` instead of leaving that orchestration implicit in chat-only context.
 
 ---
 

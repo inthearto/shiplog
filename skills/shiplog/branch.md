@@ -6,13 +6,13 @@ description: "Phase 2: Create a branch from an issue, set up worktree, and post 
 # Branch Setup (Phase 2)
 
 <!-- routing: tier-2, plan then agent -->
-<!-- cross-cutting: references/model-routing.md (Step 0), references/signing.md, references/labels.md, references/shell-portability.md -->
+<!-- cross-cutting: references/model-routing.md (Step 0), references/signing.md, references/labels.md, references/shell-portability.md, references/orchestrator-protocol.md -->
 
 0. **Routing check.** Run the phase entry check from `references/model-routing.md`.
 
 1. **Load context.** `gh issue view <N> --json title,body,labels,comments,milestone` and search knowledge graph. If the issue is missing obvious Shiplog labels, backfill per `references/labels.md`.
 
-2. **Create branch (worktree-first).** One branch, one worktree, one agent.
+2. **Create branch (worktree-first).** One branch, one worktree, one agent for the primary line of work.
 
    Delegate to `superpowers:using-git-worktrees` if available. Otherwise:
    ```bash
@@ -30,9 +30,10 @@ description: "Phase 2: Create a branch from an issue, set up worktree, and post 
    Set-Location ../$branch
    ```
    See `references/shell-portability.md` for shell-specific notes.
+   If a delegated lane later uses a forked workspace, tmux session, or other runtime-specific isolation backend, keep this feature branch/worktree as the canonical shiplog record for the work.
    **Fallback (in-place checkout):** Only when the user explicitly requests no worktree.
 
-3. **Post timeline entry.** Full Mode: comment on the issue using the session-start template below. Quiet Mode: create `--log` branch + PR using the quiet-mode template below. Sign per `references/signing.md`.
+3. **Post timeline entry.** Full Mode: comment on the issue using the session-start template below. Quiet Mode: create `--log` branch + PR using the quiet-mode template below. Record the workspace path when known. Sign per `references/signing.md`.
 
 4. **Load plan** if it exists. Delegate to `superpowers:executing-plans` or `ork:implement`.
    For delegated or tier-3 work, the plan should define a contract: allowed files, forbidden changes, stop conditions, verification, return artifact, and decision budget.
@@ -58,6 +59,7 @@ updated_at: <ISO_TIMESTAMP>
 ## [shiplog/session-start] <Brief description of the work>
 
 **Branch:** `issue/<N>-<description>`
+**Workspace:** `[absolute-or-relative-worktree-path if known]`
 **Approach:** [1-2 sentences about the plan for this session]
 
 ---
@@ -117,6 +119,7 @@ updated_at: <ISO_TIMESTAMP>
 ## [shiplog/session-start] <Brief description of the work>
 
 **Branch:** `<branch>--log`
+**Workspace:** `[absolute-or-relative-worktree-path if known]`
 **Approach:** [1-2 sentences about the plan for this session]
 
 ---
@@ -204,6 +207,37 @@ updated_at: <ISO_TIMESTAMP>
 Authored-by: <family>/<version> (<tool>)
 ```
 
+For N-way orchestration, pair these per-lane contracts with the fan-out dispatch and collection artifacts from `references/orchestrator-protocol.md`.
+
+---
+
+## Worktree Lifecycle
+
+Track the primary feature worktree from session start through cleanup.
+
+- Record the workspace path in the session-start artifact when known.
+- Use `references/orchestrator-protocol.md` for fan-out dispatch when cleanup runs as its own lane.
+- After merge, remove only worktrees whose branches are merged and no longer back an open PR.
+
+Portable cleanup sequence:
+
+```bash
+git fetch origin
+git worktree list
+git branch --merged origin/$(gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name')
+git worktree remove <path-to-worktree>
+git branch -d <branch-name>
+```
+
+```powershell
+git fetch origin
+$defaultBranch = gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name'
+git worktree list
+git branch --merged origin/$defaultBranch
+git worktree remove <path-to-worktree>
+git branch -d <branch-name>
+```
+
 ---
 
 ## Edge Cases
@@ -211,3 +245,5 @@ Authored-by: <family>/<version> (<tool>)
 **Session resume:** Detect the issue from the current branch name or worktree. If the branch has an existing worktree, `cd` into it. Find linked PRs, read comments, add "Session resumed" timeline comment via `shiplog:timeline`.
 
 **Quiet mode — feature branch rebased:** Rebase `--log` branch onto updated feature branch. Use `--force-with-lease`.
+
+**Post-merge cleanup:** If the branch is merged and no open PR still depends on it, run the cleanup protocol above or dispatch a dedicated cleanup lane per `references/orchestrator-protocol.md`.

@@ -6,7 +6,7 @@ description: "Phase 7: Add timeline comments for session starts, milestones, dis
 # Timeline Updates (Phase 7)
 
 <!-- routing: tier-3, agent -->
-<!-- cross-cutting: references/model-routing.md (Step 0), references/signing.md, references/labels.md -->
+<!-- cross-cutting: references/model-routing.md (Step 0), references/signing.md, references/labels.md, references/orchestrator-protocol.md -->
 
 0. **Routing check.** Run the phase entry check from `references/model-routing.md`.
 
@@ -127,7 +127,7 @@ See `references/closure-and-review.md` for the full closure and review protocol.
 
 ## Closure Verifier Handoff
 
-Use when a stronger model wants a bounded verifier agent to audit closure evidence:
+Use when a stronger model wants a bounded verifier lane to audit closure evidence:
 
 ```markdown
 ## [#<ID>] closure verifier handoff: <issue title>
@@ -154,6 +154,8 @@ Verify whether the listed evidence justifies closing issue #<ID>. Do not close t
 
 Authored-by: <family>/<version> (<tool>)
 ```
+
+If the verifier runs alongside other delegated work, pair this per-lane contract with the fan-out dispatch and collection artifacts from `references/orchestrator-protocol.md`.
 
 ## Closure Verification Note
 
